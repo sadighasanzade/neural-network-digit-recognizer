@@ -12,11 +12,15 @@ async def read_item(path):
 
 @app.post("/uploadfile/")
 async def create_upload_file(file: UploadFile = File(...), uuid : str = Form(...)):
-    with open(f"{uuid}.png", "wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)  
-    path = f"{uuid}.png"
-    recognizer = Recognizer(path=path)
-    num = recognizer.recognize()
-    return {"expression" : str(num)}
+    try:
+        with open(f"{uuid}.png", "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)  
+            path = f"{uuid}.png"
+            recognizer = Recognizer(path=path)
+            num = recognizer.recognize()
+            return {"expression" : str(num)}
+
+    except:
+        return {"expression" : "unknown"}        
     
 
