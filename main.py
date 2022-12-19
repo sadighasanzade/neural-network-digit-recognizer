@@ -19,7 +19,6 @@ async def create_upload_file(file: UploadFile = File(...), uuid : str = Form(...
             recognizer = Recognizer(path=path)
             num = recognizer.recognize()
 
-            os.remove(path= path)
             return {"expression" : str(num)}
 
     except:
