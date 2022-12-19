@@ -1,6 +1,6 @@
 from fastapi import FastAPI, UploadFile, Form, File
 from digit_detecter import Recognizer
-import shutil
+import shutil, os
 
 app = FastAPI()
 
@@ -18,6 +18,8 @@ async def create_upload_file(file: UploadFile = File(...), uuid : str = Form(...
             path = f"{uuid}.png"
             recognizer = Recognizer(path=path)
             num = recognizer.recognize()
+
+            os.remove(path= path)
             return {"expression" : str(num)}
 
     except:
