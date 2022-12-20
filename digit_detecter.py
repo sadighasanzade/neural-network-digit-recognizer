@@ -8,7 +8,7 @@ import keras
 class Recognizer:
     def __init__(self, path) -> None:
         self.path = path
-        self.model = keras.models.load_model('cnn_rest.h5')
+        self.model = keras.models.load_model('cnn_final.h5')
 
 
 
